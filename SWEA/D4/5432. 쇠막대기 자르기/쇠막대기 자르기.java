@@ -42,6 +42,8 @@ public class Solution {
 			
 			System.out.println("#" + t + " " + sum);
 		}
+        
+        sc.close();
 	}
 
 }
