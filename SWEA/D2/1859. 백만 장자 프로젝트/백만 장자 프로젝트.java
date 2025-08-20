@@ -22,10 +22,7 @@ class Solution
             
             int max = 0;
             long answer = 0;
-
-	    // 뒤에서부터 시작해서 최대값을 찾는다.
-	    // 최대값보다 작으면 최대값 - 현재가를 더하고
-	    // 최대값보다 크면 최대값을 현재가로 변경한다.
+           
             
             for(int i = N - 1; i >= 0; i--){
                 if(prices[i] > max){
