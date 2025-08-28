@@ -15,12 +15,8 @@ public class Solution {
 			boolean isOn = true;
 			
 			for(int i = str.length()-1; i >= str.length() - N; i--) {
-				if(i < 0) {
-					isOn = false;
-					break;
-				}
 				
-				if(str.charAt(i) != '1') {
+				if(i < 0 || str.charAt(i) != '1') {
 					isOn = false;
 					break;
 				}
