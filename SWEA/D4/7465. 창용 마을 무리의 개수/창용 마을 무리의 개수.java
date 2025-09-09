@@ -27,7 +27,6 @@ public class Solution {
 				int to = sc.nextInt();
 				
 				union(from, to);
-				union(to, from);
 //				System.out.println(Arrays.toString(p));
 			}
 			
