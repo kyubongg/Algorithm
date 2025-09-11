@@ -42,10 +42,10 @@ public class Solution {
 			}
 			
 			// 각 숫자마다 도달할 수 있는 노드 찾기
-			for(int k = 0; k < N+1; k++) {
-				for(int from = 0; from < N+1; from++) {
+			for(int k = 1; k < N+1; k++) {
+				for(int from = 1; from < N+1; from++) {
 					if(dist[from][k] == INF) continue;
-					for(int to = 0; to < N+1; to++) {
+					for(int to = 1; to < N+1; to++) {
 						if(dist[k][to] == INF) continue;
 						dist[from][to] = Math.min(dist[from][to], dist[from][k] + dist[k][to]);
 					}
@@ -54,6 +54,8 @@ public class Solution {
 			
 			
 			// 각 노드별 순위 확인
+			// 2차원 배열에 출발, 도착 정보가 있기 땜누에 한 줄씩 읽으면 알 수 있다.
+			// 실행 시간은 더 오래걸리네
 			int ans = 0;
 			for(int i = 1; i <= N; i++) {
 				int count = 0;
@@ -76,21 +78,3 @@ public class Solution {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
