@@ -41,6 +41,7 @@ public class Solution {
 				dist[from][to] = 1;
 			}
 			
+			// 각 숫자마다 도달할 수 있는 노드 찾기
 			for(int k = 0; k < N+1; k++) {
 				for(int from = 0; from < N+1; from++) {
 					if(dist[from][k] == INF) continue;
@@ -51,26 +52,22 @@ public class Solution {
 				}
 			}
 			
-			List<Integer>[] arr = new ArrayList[N+1];
 			
-			for(int i = 0; i < N+1; i++) arr[i] = new ArrayList<>();
-			
+			// 각 노드별 순위 확인
 			int ans = 0;
-			for(int i = 0; i < dist.length; i++) {
-				int cnt = 0;
-				for(int j = 1; j < dist[i].length; j++) {
-					if(dist[i][j] != 0 && dist[i][j] != INF) {
-						// 해당 노드에서 나가서 도달할 수 있는 노드
-						arr[i].add(j);
-						// 해당 노드로 들어오는 노드
-						arr[j].add(i);
-					}
+			for(int i = 1; i <= N; i++) {
+				int count = 0;
+				for(int j = 1; j <= N; j++) {
+					if(i == j) continue;
+					
+					if(dist[i][j] != INF || dist[j][i] != INF) count++;
+				}
+				
+				if(count == N-1) {
+					ans++;
 				}
 			}
 
-			for(List<Integer> list : arr) {
-				if(list.size() == N-1) ans++;
-			}
 
 			
 			System.out.println("#" + t + " " + ans);
@@ -79,3 +76,21 @@ public class Solution {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
