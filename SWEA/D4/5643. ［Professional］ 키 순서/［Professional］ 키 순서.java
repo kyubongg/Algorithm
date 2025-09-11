@@ -60,14 +60,14 @@ public class Solution {
 				int cnt = 0;
 				for(int j = 1; j < dist[i].length; j++) {
 					if(dist[i][j] != 0 && dist[i][j] != INF) {
-						// 해당 노드에서 나가서 도달할 수 있는 곳
+						// 해당 노드에서 나가서 도달할 수 있는 노드
 						arr[i].add(j);
+						// 해당 노드로 들어오는 노드
 						arr[j].add(i);
 					}
 				}
 			}
-		
-			
+
 			for(List<Integer> list : arr) {
 				if(list.size() == N-1) ans++;
 			}
