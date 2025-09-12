@@ -7,7 +7,6 @@ public class Solution {
 
 	
 	static class Micro{
-		// dir: 위(1), 아래(2), 좌(3), 우(4)
 		// maxCount: 합쳐질 때 방향을 정하기 위한 변수
 		int r, c, count, dir, maxCount;
 		
@@ -33,7 +32,6 @@ public class Solution {
 			int K = sc.nextInt();
 			
 			Queue<Micro> q = new LinkedList<>();
-			Micro[][] map = new Micro[N][N];
 			
 			for(int i = 0; i < K; i++) {
 				int r = sc.nextInt();
@@ -42,18 +40,18 @@ public class Solution {
 				int dir = sc.nextInt();
 				
 				Micro micro = new Micro(r, c, count, dir);
-				map[r][c] = micro;
 				q.add(micro);
 			}
 			
 			
+			// 이동할 때 모든 군집이 한번에 이동함
 			for(int i = 0; i < M; i++) {
 				
 				Micro[][] nextMap = new Micro[N][N];
 				
 				int currentSize = q.size();
 				
-				for(int j = 0 ; j < currentSize; j++) {
+				while(!q.isEmpty()) {
 					Micro current = q.poll();
 					
 					// 군집 이동
@@ -61,13 +59,22 @@ public class Solution {
 					current.c += drc[current.dir][1];
 					
 					// 군집이 약품 셀로 이동했을때
+					// dir: 위(1), 아래(2), 좌(3), 우(4)
 					if(current.r == 0 || current.c == 0 || current.r == N-1 || current.c == N-1) {
 						current.count /= 2;
 						switch(current.dir) {
-							case 1: current.dir = 2; break;
-							case 2: current.dir = 1; break;
-							case 3: current.dir = 4; break;
-							case 4: current.dir = 3; break;
+							case 1: 
+								current.dir = 2; 
+								break;
+							case 2: 
+								current.dir = 1; 
+								break;
+							case 3: 
+								current.dir = 4; 
+								break;
+							case 4: 
+								current.dir = 3; 
+								break;
 						}
 					}
 					
@@ -81,7 +88,7 @@ public class Solution {
 						nextMap[current.r][current.c] = current;	
 					}
 					
-					// *핵심* (동시 이동이라서 어떻게 해야할지 몰라서 AI 도움 받음)
+					// *핵심*
 					// 이동하려는 셀에 다른 군집이 있다면
 					// 셀에 존재하는 군집을 가져오기
 					// 셀에 존재하는 군집의 최대 크기와 이번에 이동한 군집의 크기 비교
@@ -115,5 +122,5 @@ public class Solution {
 			System.out.println("#" + t + " " + ans);
 		}
 	}
-
+	
 }
