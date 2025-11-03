@@ -11,19 +11,19 @@ public class Main {
 		
 		int N = sc.nextInt();
 		
-		PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
 		
 		for(int i = 0; i < N; i++) {
 			for(int j = 0; j < N; j++) {
 				int num = sc.nextInt();
 			
 				pq.add(num);
+				if(pq.size() > N) {
+					pq.poll();
+				}
 			}
 		}
 		
-		for(int i = 0; i < N-1; i++) {
-			pq.poll();
-		}
 		
 		System.out.println(pq.poll());
 		sc.close();
