@@ -1,70 +1,59 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
-
-	public static void main(String[] args) throws FileNotFoundException {
-		//File file = new File("./src/input.txt");
+	public static void main(String[] args) {
+		
+		
 		Scanner sc = new Scanner(System.in);
-
 		
 		for(int t = 1; t <= 10; t++) {
-			
-			int N = sc.nextInt();		// 암호문의 개수
-			List<String> list = new ArrayList<>();	// 암호문 리스트
+			int N = sc.nextInt();
+			List<Integer> passwordList = new ArrayList<>();
 			
 			for(int i = 0; i < N; i++) {
-				list.add(sc.next());
+				passwordList.add(sc.nextInt());
 			}
 			
-			int M = sc.nextInt();		// 명령어 개수
+			int M = sc.nextInt();
 			
-			// 명령어 종류
-			// 1. I(삽입) x,y,s: x번째 암호문 다음에 y개의 암호문 삽입 s(암호문들)
-			// 2. D(삭제) x,y: x번째 암호문 바로 다음부터 y개의 암호문 삭제
-			// 3. A(추가) y,s: 맨 뒤에 y개의 암호문을 덧붙인다.
-			
-//			StringBuilder sb = new StringBuilder();
-			
-			for(int i = 0; i < M; i++){
-				String str = sc.next();
+			for(int i = 0; i < M; i++) {
+				String command = sc.next();
 				
-				if(str.equals("I")) {
-					int x = sc.nextInt();
-					int y = sc.nextInt();
-					for(int j = 0; j < y; j++) {
-						String IStr = sc.next();
-						list.add(x+j, IStr);
-					}
-				}else if(str.equals("D")) {
-					int x = sc.nextInt();
-					int y = sc.nextInt();
-					for(int j = 0; j < y; j++) {
-						list.remove(x);
-					}
+				if(command.equals("I")) {
+					int idx = sc.nextInt();
+					int cnt = sc.nextInt();
 					
-				}else if(str.equals("A")) {
-					int y = sc.nextInt();
-					for(int j = 0; j < y; j++) {
-						String AStr = sc.next();
-						list.add(AStr);
+					for(int j = 0; j < cnt; j++) {
+						passwordList.add(idx+j, sc.nextInt());
 					}
+				}else if(command.equals("D")) {
+					int idx = sc.nextInt();
+					int cnt = sc.nextInt();
 					
+					for(int j = 0; j < cnt; j++) {
+						passwordList.remove(idx);
+					}
+				}else {
+					int cnt = sc.nextInt();
+					for(int j = 0; j < cnt; j++) {
+						passwordList.add(sc.nextInt());
+					}
 				}
 			}
 			
-			System.out.print("#" + t + " ");
-			
-			for(int k = 0; k < 10; k++) {
-				System.out.print(list.get(k) + " ");
+			System.out.print("#" + t);
+			for(int i = 0; i < 10; i++) {
+				System.out.print(" " + passwordList.get(i));
 			}
 			System.out.println();
 			
-			
 		}
+		
+		
+		
+		
+		sc.close();
 	}
-
 }
