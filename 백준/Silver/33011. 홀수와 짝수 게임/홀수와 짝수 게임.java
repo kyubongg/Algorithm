@@ -1,24 +1,31 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		
-		Scanner sc = new Scanner(System.in);
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		int T = sc.nextInt();
+		int T = Integer.parseInt(br.readLine());
+//		StringBuilder sb = new StringBuilder();
 		
 		for(int tc = 1; tc <= T; tc++) {
-			int N = sc.nextInt();
+			int N = Integer.parseInt(br.readLine());
 			
 			int even = 0;
 			int odd = 0;
 			
-			for(int i = 0; i < N; i++) {
-				if(sc.nextInt() % 2 == 0)
-					even++;
-				else
-					odd++;
-			}
+			String [] nums = br.readLine().split(" ");
+            for(int i=0; i<N; i++){
+                if(Integer.parseInt(nums[i]) % 2 ==0){
+                	even++;
+                }
+                else{
+                	odd++;
+                }
+            }
 			
 			// 첫번째 뽑은 카드와 홀짝 여부가 동일해야함
 			
@@ -47,6 +54,5 @@ public class Main {
 			
 		}
 		
-		sc.close();
 	}
 }
