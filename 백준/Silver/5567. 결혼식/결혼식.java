@@ -8,16 +8,6 @@ import java.util.Queue;
 
 public class Main {
 	
-	static class Friend {
-		
-		int num, edge;
-		
-		public Friend(int num, int edge) {
-			this.num = num;
-			this.edge = edge;
-		}
-	}
-	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -33,43 +23,47 @@ public class Main {
 		}
 		
 		for(int i = 0; i < M; i++) {
-			String[] friend = br.readLine().split(" ");
+			String[] input = br.readLine().split(" ");
 			
-			int friend1 = Integer.parseInt(friend[0]);
-			int friend2 = Integer.parseInt(friend[1]);
+			int a = Integer.parseInt(input[0]);
+			int b = Integer.parseInt(input[1]);
 			
-			friendsArr[friend1].add(friend2);
-			friendsArr[friend2].add(friend1);
+			friendsArr[a].add(b);
+			friendsArr[b].add(a);
 		}
 		
-		// 상근이의 학번은 1번이기 때문에 1번부터 그래프 순회
-		boolean[] isVisited = new boolean[N+1];
-		Queue<Friend> q = new ArrayDeque<>();
-		
-		q.add(new Friend(1, 0));
-		isVisited[1] = true;
 	
-		int friendsCnt = 0;
+		System.out.println(countInvitedFriends(friendsArr, N));
+	}
+	
+	private static int countInvitedFriends(List<Integer>[] friendsArr, int N) {
+		boolean[] visited = new boolean[N+1];
+		Queue<Integer> queue = new ArrayDeque<>();
 		
+		visited[1] = true;
+		queue.offer(1);
 		
-		while(!q.isEmpty()) {
-			Friend now = q.poll();
+		int count = 0;
+		int depth = 0;
+		
+		while(!queue.isEmpty() && depth < 2) {
+			int size = queue.size();
 			
-			isVisited[now.num] = true;
-			
-			for(int next : friendsArr[now.num]) {
+			for(int i = 0; i < size; i++) {
+				int curr = queue.poll();
 				
-				if(isVisited[next] || now.edge > 1) continue;
-				
-				isVisited[next] = true;
-				friendsCnt++;
-				q.add(new Friend(next, now.edge + 1));
+				for(int next : friendsArr[curr]) {
+					if(!visited[next]) {
+						visited[next] = true;
+						queue.offer(next);
+						count++;
+					}
+				}
 			}
 			
+			depth++;
 		}
 		
-		
-		
-		System.out.println(friendsCnt);
+		return count;
 	}
 }
