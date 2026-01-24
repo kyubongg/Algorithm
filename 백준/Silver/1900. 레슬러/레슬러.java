@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -27,7 +28,7 @@ public class Main {
 			int thisPower = this.power + o.power * this.ring;
 			int InputPower = o.power + this.power * o.ring;
 			
-			return thisPower > InputPower ? 1 : -1;
+			return thisPower > InputPower ? -1 : 1;
 		}
 	}
 	
@@ -56,9 +57,12 @@ public class Main {
 		
 		players.sort(null);
 		
-		for(int i = players.size()-1; i >= 0; i--) {
-			System.out.println(players.get(i).idx);
+		StringBuilder sb = new StringBuilder();
+		for(Player p : players) {
+			sb.append(p.idx).append("\n");
 		}
+		
+		System.out.print(sb);
 	}
 
 }
