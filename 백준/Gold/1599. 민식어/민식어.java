@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -11,14 +12,18 @@ import java.util.StringTokenizer;
 
 public class Main {
 	
-	static class Word {
+	static class Word implements Comparable<Word>{
 		String key, original;
 		
 		public Word(String key, String original) {
 			this.key = key;
 			this.original = original;
 		}
-		
+
+		@Override
+		public int compareTo(Word o) {
+			return this.key.compareTo(o.key);
+		}
 		
 	}
 	
@@ -54,7 +59,7 @@ public class Main {
         	list.add(new Word(key, word));
         }
         
-        list.sort(Comparator.comparing(w -> w.key));
+        Collections.sort(list);
         
         StringBuilder sb = new StringBuilder();
         for (Word w : list) {
