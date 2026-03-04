@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -15,31 +16,39 @@ public class Main {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
+				
+		// 기존 코드의 시간/공간 복잡도를 줄이기 위해
+		// 1. Set 사용 X => 원본배열을 복사해서 정렬한 후, 순회하면서 중복을 무시하는 방식
+		// 2. List의 메모리 부담이 크기 때문에 int[]로 사용
+		// 3. 정렬을 내림차순으로 정렬해서 재계산하는것이 아닌, 그냥 오름차순 정렬
+		
+		int[] origin = new int[N];
+		int[] sorted = new int[N];
 		
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		
-		int[] arr = new int[N];
-		Set<Integer> set = new LinkedHashSet<>();
 		for (int i = 0; i < N; i++) {
-			int input = Integer.parseInt(st.nextToken());
-			arr[i] = input;
-			set.add(input);
+			origin[i] = sorted[i] = Integer.parseInt(st.nextToken());
 		}
-
-		List<Integer> list = new ArrayList<>(set);
-		Collections.sort(list, Collections.reverseOrder());
+		
+		Arrays.sort(sorted);
 		
 		Map<Integer, Integer> map = new HashMap<>();
-		for (int i = 0; i < list.size(); i++) {
-			map.put(list.get(i), list.size()-1 - i);
+		int rank = 0;
+		for (int value : sorted) {
+			if (!map.containsKey(value)) {
+				map.put(value, rank);
+				rank++;
+			}
 		}
 		
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < N; i++) {
-			sb.append(map.get(arr[i])).append(" ");
+			sb.append(map.get(origin[i])).append(" ");
 		}
 		
 		System.out.println(sb);
+		
+		
 	}
 	
 	
