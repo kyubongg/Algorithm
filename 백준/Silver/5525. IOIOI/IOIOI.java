@@ -27,10 +27,31 @@ public class Main {
 		if (M == len) {
 			if (S.equals(sb.toString())) ans++; 
 		} else {
-			for (int i = 0; i < M-sb.length(); i++) {
-				String str = S.substring(i, i+len);
+			for (int i = 0; i < M - len; i++) {
+				boolean flag = true;
+				for (int j = i; j < i + len; j++) {
+					if (sb.charAt(j-i) != S.charAt(j) && S.charAt(j) == 'O') {
+						flag = false;
+						int cnt = 1;
+						while (true) {
+							if (S.charAt(j+cnt) == 'I') {
+								break;
+							}
+							cnt++;
+						}
+						i += cnt-1;
+						break;
+					}
+					
+					if (sb.charAt(j-i) != S.charAt(j) && S.charAt(j) == 'I') {
+						flag = false;
+						break;
+					}
+				}
 				
-				if (str.equals(sb.toString())) ans++;
+				if (flag) {
+					ans++;
+				}
 			}
 		}
 		
