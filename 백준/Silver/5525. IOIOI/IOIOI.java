@@ -10,51 +10,25 @@ public class Main {
 		
 		int N = Integer.parseInt(br.readLine());
 		int M = Integer.parseInt(br.readLine());
-		String S = br.readLine();
-		
-		int len = 2 * N + 1;
-		StringBuilder sb = new StringBuilder();
-		for (int i = 1; i <= len; i++) {
-			if (i % 2 != 0) {
-				sb.append("I");
-			} else {
-				sb.append("O");
-			}
-		}
-		
+		char[] S = br.readLine().toCharArray();
 		
 		int ans = 0;
-		if (M == len) {
-			if (S.equals(sb.toString())) ans++; 
-		} else {
-			for (int i = 0; i < M - len; i++) {
-				boolean flag = true;
-				for (int j = i; j < i + len; j++) {
-					if (sb.charAt(j-i) != S.charAt(j) && S.charAt(j) == 'O') {
-						flag = false;
-						int cnt = 1;
-						while (true) {
-							if (S.charAt(j+cnt) == 'I') {
-								break;
-							}
-							cnt++;
-						}
-						i += cnt-1;
-						break;
-					}
-					
-					if (sb.charAt(j-i) != S.charAt(j) && S.charAt(j) == 'I') {
-						flag = false;
-						break;
-					}
-				}
+		int cnt = 0;
+		
+		for (int i = 1; i < M -1 ; i++) {
+			
+			if (S[i-1] == 'I' && S[i] == 'O' && S[i+1] == 'I') {
+				cnt++;
 				
-				if (flag) {
+				if (cnt == N) {
 					ans++;
+					cnt--;
 				}
+				i++;
+			}else {
+				cnt = 0;
 			}
 		}
-		
 		
 		System.out.println(ans);
 	}
