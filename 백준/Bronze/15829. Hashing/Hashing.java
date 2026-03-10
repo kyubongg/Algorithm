@@ -5,6 +5,7 @@ import java.util.*;
 
 
 public class Main {
+
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -15,7 +16,8 @@ public class Main {
 
         long ans = 0;
         for (int i = 0; i < N; i++) {
-            ans += (long)((input.charAt(i) - 'a' + 1) * Math.pow(31, i) % MOD);
+            long pow = (long) Math.pow(31, i) % MOD;
+            ans += (input.charAt(i) - 'a' + 1) * pow;
         }
 
         System.out.println(ans);
