@@ -15,15 +15,14 @@ public class Main {
         int MOD = 1234567891;
 
         long ans = 0;
+        long pow = 1;
         for (int i = 0; i < N; i++) {
 
-            long pow = 1;
-            for (int j = 0; j < i; j++) {
-                pow *= 31;
-                pow %= MOD;
-            }
+            long term = (input.charAt(i) - 'a' + 1) * pow % MOD;
 
-            ans += (input.charAt(i) - 'a' + 1) * pow;
+            ans = (ans + term) % MOD;
+
+            pow = (pow * 31) % MOD;
         }
 
         System.out.println(ans);
