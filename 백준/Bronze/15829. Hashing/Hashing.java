@@ -16,7 +16,13 @@ public class Main {
 
         long ans = 0;
         for (int i = 0; i < N; i++) {
-            long pow = (long) Math.pow(31, i) % MOD;
+
+            long pow = 1;
+            for (int j = 0; j < i; j++) {
+                pow *= 31;
+                pow %= MOD;
+            }
+
             ans += (input.charAt(i) - 'a' + 1) * pow;
         }
 
