@@ -5,36 +5,39 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	public static void main(String[] args) throws IOException{
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		while (true) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			
+			int A = Integer.parseInt(st.nextToken());
+			int B = Integer.parseInt(st.nextToken());
+			int C = Integer.parseInt(st.nextToken());
+			
+			if (A == 0 && B == 0 && C == 0) break;
+			
+			int[] arr = new int[3];
+			arr[0] = A;
+			arr[1] = B;
+			arr[2] = C;
+			
+			Arrays.sort(arr);
+			
+			if (Math.pow(arr[2], 2) == Math.pow(arr[1], 2) + Math.pow(arr[0], 2)) System.out.println("right");
+			else System.out.println("wrong");
+		}
+		
+		
+		
+		
+ 	}
 
-        StringTokenizer st;
-
-        while (true) {
-            st = new StringTokenizer(br.readLine());
-
-            int[] lens = new int[3];
-            for (int i = 0; i < 3; i++) {
-                int num = Integer.parseInt(st.nextToken());
-                if (num == 0) return;
-
-                lens[i] = num;
-            }
-
-            Arrays.sort(lens);
-
-            int a = lens[0];
-            int b = lens[1];
-            int c = lens[2];
-
-            if (c == Math.sqrt((int) Math.pow(a, 2) + (int) Math.pow(b,2))) {
-                System.out.println("right");
-            } else {
-                System.out.println("wrong");
-            }
-
-        }
-
-    }
+	
+	
+	
+	
+	
 }
