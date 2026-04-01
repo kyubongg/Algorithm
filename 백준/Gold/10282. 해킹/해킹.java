@@ -1,97 +1,86 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
 
 public class Main {
-	
-	static class Node implements Comparable<Node>{
-		int to, time;
 
-		public Node(int to, int time) {
-			this.to = to;
-			this.time = time;
-		}
+    static class Node implements Comparable<Node>{
+        int c, time;
 
-		@Override
-		public int compareTo(Node o) {
-			return this.time - o.time;
-			
-		}
+        public Node(int c, int weight) {
+            this.c = c;
+            this.time = weight;
+        }
 
-		@Override
-		public String toString() {
-			return "Node [to=" + to + ", time=" + time + "]";
-		}
-		
-		
-	}
-	
-	public static void main(String[] args) {
+        @Override
+        public int compareTo(Node o) {
+            return (int)(this.time - o.time);
+        }
+    }
 
-		Scanner sc = new Scanner(System.in);
-		
-		int tc = sc.nextInt();
-		
-		for(int t = 1; t <= tc; t++) {
-			int n = sc.nextInt();	// 컴퓨터 개수
-			int d = sc.nextInt();	// 의존성 개수
-			int c = sc.nextInt();	// 해킹당한 컴퓨터 번호
-			
-			List<Node>[] nodes = new ArrayList[n+1];
-			for(int i = 0; i < n+1; i++) {
-				nodes[i] = new ArrayList<>();
-			}
-			
-			// 의존성 개수만큼 반복
-			for(int i = 0 ; i < d; i++) {
-				int to = sc.nextInt();
-				int from = sc.nextInt();
-				int time = sc.nextInt();
-				
-				nodes[from].add(new Node(to, time));
-			}
-			
-			PriorityQueue<Node> pq = new PriorityQueue<>();
-			boolean[] visited = new boolean[n+1];
-			int[] dist = new int[n+1];
-			Arrays.fill(dist, Integer.MAX_VALUE);
-			
-			dist[c] = 0;
-			pq.add(new Node(c,0));
-			
-			while(!pq.isEmpty()) {
-				Node node = pq.poll();
-				
-				if(visited[node.to]) continue;
-				
-//				System.out.println(node);
-				visited[node.to] = true;
-				
-				for(Node N : nodes[node.to]) {
-					
-					if(!visited[N.to] && dist[N.to] > dist[node.to] + N.time) {
-						dist[N.to] = dist[node.to] + N.time;
-						pq.add(new Node(N.to, dist[N.to]));
-					}
-				}
-						
-			}
-			
-			int max = 0;
-			int cnt = 0;
-			for(int num : dist) {
-				if(num != Integer.MAX_VALUE) {
-					max = Math.max(max, num);
-					cnt++;
-				}
-			}
-			
-			
-			System.out.println(cnt + " " + max);
-		}
-	}
+    static int INF = Integer.MAX_VALUE;
+    public static void main(String[] args) throws IOException {
 
-	
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        StringBuilder sb = new StringBuilder();
+        int T = Integer.parseInt(br.readLine());
+        for (int tc = 1; tc <= T; tc++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            int d = Integer.parseInt(st.nextToken());
+            int start = Integer.parseInt(st.nextToken());
+
+            List<Node>[] computers = new ArrayList[n+1];
+            for (int i = 1; i <= n; i++) {
+                computers[i] = new ArrayList<>();
+            }
+
+            for (int i = 0; i < d; i++) {
+                st = new StringTokenizer(br.readLine());
+
+                int to = Integer.parseInt(st.nextToken());
+                int from = Integer.parseInt(st.nextToken());
+                int cost = Integer.parseInt(st.nextToken());
+
+                computers[from].add(new Node(to, cost));
+            }
+
+            int[] times = new int[n+1];
+            Arrays.fill(times, INF);
+
+            PriorityQueue<Node> pq = new PriorityQueue<>();
+            pq.add(new Node(start, 0));
+            times[start] = 0;
+
+            while (!pq.isEmpty()) {
+                Node node = pq.poll();
+
+                if (node.time > times[node.c]) continue;
+
+                for (Node next : computers[node.c]) {
+                    if (times[next.c] > next.time + times[node.c]) {
+                        times[next.c] = next.time + times[node.c];
+                        pq.add(new Node(next.c, times[next.c]));
+                    }
+                }
+            }
+
+            int cnt = 0;
+            int time = 0;
+            for (int i = 1; i <= n; i++) {
+                if (times[i] < INF) {
+                    cnt++;
+                    time = Math.max(time, times[i]);
+                }
+            }
+
+            sb.append(cnt).append(" ").append(time).append("\n");
+        }
+
+        System.out.println(sb.toString());
+
+    }
 }
