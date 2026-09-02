@@ -23,3 +23,4 @@ BaekjoonHub이 지원하지 않는 사이트라 손으로 정리한다.
 | 날짜 | 난이도 | 번호 | 문제 | 분류 | 링크 |
 | --- | --- | --- | --- | --- | --- |
 | 2026-08-30 | Silver I | 2194 | [요플레 공장](./Silver/2194.%20요플레%20공장/README.md) | 그리디 | [문제](https://jungol.co.kr/problem/2194) |
+| 2026-09-02 | Silver II | 6058 | [N Rook 2](./Silver/6058.%20N%20Rook%202/README.md) | 백트래킹 | [문제](https://jungol.co.kr/problem/6058) |
