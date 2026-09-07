@@ -26,3 +26,4 @@ BaekjoonHub이 지원하지 않는 사이트라 손으로 정리한다.
 | 2026-09-02 | Silver II | 6058 | [N Rook 2](./Silver/6058.%20N%20Rook%202/README.md) | 백트래킹 | [문제](https://jungol.co.kr/problem/6058) |
 | 2026-09-05 | Silver II | 5170 | [나무꾼 미르코](./Silver/5170.%20나무꾼%20미르코/README.md) | 이분탐색 | [문제](https://jungol.co.kr/problem/5170) |
 | 2026-09-06 | Silver II | 2581 | [예산](./Silver/2581.%20예산/README.md) | 이분탐색 | [문제](https://jungol.co.kr/problem/2581) |
+| 2026-09-07 | Silver I | 6277 | [늑대와 양](./Silver/6277.%20늑대와%20양/README.md) | BFS, 플러드 필 | [문제](https://jungol.co.kr/problem/6277) |
